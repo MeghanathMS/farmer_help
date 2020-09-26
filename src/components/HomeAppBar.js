@@ -13,15 +13,18 @@ import {
   Table,
   Toolbar,
   colors,
+  Fab,
+  Zoom,
+  useTheme,
 } from "@material-ui/core";
 import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignInCard from "./SignInCard";
 import {
   AccountCircle,
+  Add,
   ExitToApp,
   Message,
-  More,
   MoreVert,
   Notifications,
 } from "@material-ui/icons";
@@ -46,13 +49,19 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
 }));
 
 export default function HomeAppBar(props) {
+  const theme = useTheme();
   const user = FirebaseApp.auth().currentUser;
+  const [messageCount, setMessageCount] = React.useState(0);
+  const [notificationCount, setNotificationCoutn] = React.useState(0);
   const [loginPage, setLoginPage] = React.useState(false);
-  const [userMenuAnchor, setUserMenuAnchor] = React.useState(null);
-  const isUserMenuOpen = Boolean(userMenuAnchor);
   const toggleLoginPage = () => {
     setLoginPage(true);
   };
@@ -72,12 +81,15 @@ export default function HomeAppBar(props) {
     setDrawerState(open);
   };
   const classes = useStyles();
+  const [userMenuAnchor, setUserMenuAnchor] = React.useState(null);
+  const isUserMenuOpen = Boolean(userMenuAnchor);
   const userMenuId = "user-menu";
   const handleUserMenuOpen = (event) => {
     setUserMenuAnchor(event.currentTarget);
   };
   const handleUserMenuClose = () => {
     setUserMenuAnchor(null);
+    handleMobileMenuClose();
   };
   const userMenu = (
     <>
@@ -117,6 +129,68 @@ export default function HomeAppBar(props) {
       )}
     </>
   );
+  const [mobileMenuAnchor, setMobileMenuAnchor] = React.useState(null);
+  const isMobileMenuOpen = Boolean(mobileMenuAnchor);
+  const mobileMenuId = "mobile-menu";
+  const handleMobileMenuOpen = (event) => {
+    setMobileMenuAnchor(event.currentTarget);
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMenuAnchor(null);
+  };
+  const mobileMenu = (
+    <>
+      <Menu
+        anchorEl={mobileMenuAnchor}
+        id={mobileMenuId}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        {user == null && <MenuItem>Sign In</MenuItem>}
+        {user != null && (
+          <div>
+            <MenuItem onClick={handleMobileMenuClose}>
+              <IconButton>
+                <Badge badgeContent={messageCount}>
+                  <Message />
+                </Badge>
+              </IconButton>
+              Messages
+            </MenuItem>
+            <MenuItem onClick={handleMobileMenuClose}>
+              <IconButton>
+                <Badge badgeContent={notificationCount}>
+                  <Notifications />
+                </Badge>
+              </IconButton>
+              Notifications
+            </MenuItem>
+            <MenuItem
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={userMenuId}
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleUserMenuOpen}
+            >
+              <IconButton>
+                <Avatar src={user.photoURL} />
+              </IconButton>
+              My Profile
+            </MenuItem>
+          </div>
+        )}
+      </Menu>
+    </>
+  );
+  const transitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen,
+  };
+
   return (
     <div>
       <AppBar position={"fixed"} className={classes.appBar}>
@@ -136,12 +210,12 @@ export default function HomeAppBar(props) {
           {user != null && (
             <div className={classes.sectionDesktop}>
               <IconButton>
-                <Badge>
+                <Badge badgeContent={messageCount}>
                   <Message />
                 </Badge>
               </IconButton>
               <IconButton>
-                <Badge>
+                <Badge badgeContent={notificationCount}>
                   <Notifications />
                 </Badge>
               </IconButton>
@@ -159,13 +233,35 @@ export default function HomeAppBar(props) {
           )}
 
           <div className={classes.sectionMobile}>
-            <IconButton>
+            <IconButton
+              edge="end"
+              aria-label="mobile menu"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleMobileMenuOpen}
+            >
               <MoreVert />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
       {userMenu}
+      {mobileMenu}
+      <Zoom
+        key={"primary"}
+        in={true}
+        timeout={transitionDuration}
+        style={{
+          transitionDelay: `${transitionDuration.exit}ms`,
+        }}
+        unmountOnExit
+      >
+        <Fab className={classes.fab}>
+          <Add />
+        </Fab>
+      </Zoom>
+
       <SignInCard open={loginPage} onClose={handleLoginPageClose} />
       <SwipeableDrawer
         anchor={"left"}
