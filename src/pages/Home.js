@@ -14,7 +14,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <HomeAppBar user={this.state.user} />
+        <HomeAppBar />
       </div>
     );
   }
