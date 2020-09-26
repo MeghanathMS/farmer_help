@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/static/js/main.229f3101.chunk.js",
-    "main.js.map": "/static/js/main.229f3101.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.42b43c7a.js",
-    "runtime-main.js.map": "/static/js/runtime-main.42b43c7a.js.map",
-    "static/css/2.85b71462.chunk.css": "/static/css/2.85b71462.chunk.css",
-    "static/js/2.619579f3.chunk.js": "/static/js/2.619579f3.chunk.js",
-    "static/js/2.619579f3.chunk.js.map": "/static/js/2.619579f3.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.c9138b044c10e26fbaf500a6e2b55bb7.js": "/precache-manifest.c9138b044c10e26fbaf500a6e2b55bb7.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.85b71462.chunk.css.map": "/static/css/2.85b71462.chunk.css.map",
-    "static/css/main.5ecd60fb.chunk.css.map": "/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.619579f3.chunk.js.LICENSE.txt": "/static/js/2.619579f3.chunk.js.LICENSE.txt"
+    "main.css": "/farmer_help/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/farmer_help/static/js/main.6ae052f7.chunk.js",
+    "main.js.map": "/farmer_help/static/js/main.6ae052f7.chunk.js.map",
+    "runtime-main.js": "/farmer_help/static/js/runtime-main.4bff26f9.js",
+    "runtime-main.js.map": "/farmer_help/static/js/runtime-main.4bff26f9.js.map",
+    "static/css/2.85b71462.chunk.css": "/farmer_help/static/css/2.85b71462.chunk.css",
+    "static/js/2.8aa7704e.chunk.js": "/farmer_help/static/js/2.8aa7704e.chunk.js",
+    "static/js/2.8aa7704e.chunk.js.map": "/farmer_help/static/js/2.8aa7704e.chunk.js.map",
+    "index.html": "/farmer_help/index.html",
+    "precache-manifest.1607d937333d4bdd087b691c698d270c.js": "/farmer_help/precache-manifest.1607d937333d4bdd087b691c698d270c.js",
+    "service-worker.js": "/farmer_help/service-worker.js",
+    "static/css/2.85b71462.chunk.css.map": "/farmer_help/static/css/2.85b71462.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/farmer_help/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.8aa7704e.chunk.js.LICENSE.txt": "/farmer_help/static/js/2.8aa7704e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.42b43c7a.js",
+    "static/js/runtime-main.4bff26f9.js",
     "static/css/2.85b71462.chunk.css",
-    "static/js/2.619579f3.chunk.js",
+    "static/js/2.8aa7704e.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.229f3101.chunk.js"
+    "static/js/main.6ae052f7.chunk.js"
   ]
 }
