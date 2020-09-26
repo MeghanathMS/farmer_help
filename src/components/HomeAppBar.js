@@ -64,6 +64,7 @@ export default function HomeAppBar(props) {
   const [loginPage, setLoginPage] = React.useState(false);
   const toggleLoginPage = () => {
     setLoginPage(true);
+    handleUserMenuClose();
   };
   const handleLoginPageClose = () => {
     setLoginPage(false);
@@ -91,6 +92,10 @@ export default function HomeAppBar(props) {
     setUserMenuAnchor(null);
     handleMobileMenuClose();
   };
+  const handleLogout = () => {
+    FirebaseApp.auth().signOut();
+    handleUserMenuClose();
+  };
   const userMenu = (
     <>
       {user != null && (
@@ -113,7 +118,7 @@ export default function HomeAppBar(props) {
                   <TableCell>{user.displayName}</TableCell>
                 </TableRow>
               </MenuItem>
-              <MenuItem onClick={handleUserMenuClose}>
+              <MenuItem onClick={handleLogout}>
                 <TableRow>
                   <TableCell>
                     <Avatar color={colors.white}>
@@ -149,7 +154,7 @@ export default function HomeAppBar(props) {
         open={isMobileMenuOpen}
         onClose={handleMobileMenuClose}
       >
-        {user == null && <MenuItem>Sign In</MenuItem>}
+        {user == null && <MenuItem onClick={toggleLoginPage}>Sign In</MenuItem>}
         {user != null && (
           <div>
             <MenuItem onClick={handleMobileMenuClose}>
@@ -186,10 +191,6 @@ export default function HomeAppBar(props) {
       </Menu>
     </>
   );
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
 
   return (
     <div>
@@ -248,20 +249,6 @@ export default function HomeAppBar(props) {
       </AppBar>
       {userMenu}
       {mobileMenu}
-      <Zoom
-        key={"primary"}
-        in={true}
-        timeout={transitionDuration}
-        style={{
-          transitionDelay: `${transitionDuration.exit}ms`,
-        }}
-        unmountOnExit
-      >
-        <Fab className={classes.fab}>
-          <Add />
-        </Fab>
-      </Zoom>
-
       <SignInCard open={loginPage} onClose={handleLoginPageClose} />
       <SwipeableDrawer
         anchor={"left"}
